@@ -5,7 +5,7 @@ apt-get update
 apt-get upgrade
 apt-get install -y apache2
 apt-get install -y php libapache2-mod-php php-mcrypt php-mysql
-/etc/init.d/apache2 restart
+
 
 #INSTALACIÓN DE MÓDULOS
 a2enmod proxy
@@ -18,3 +18,7 @@ a2enmod proxy_balancer
 a2enmod proxy_connect
 a2enmod proxy_html
 a2enmod lbmethod_byrequests
+
+#EDITAMOS 000-DEFAULT.CONF
+cp /vagrant/config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+/etc/init.d/apache2 restart

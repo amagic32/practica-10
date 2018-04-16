@@ -6,6 +6,18 @@ Vagrant.configure("2") do |config|
   
   config.vm.box = "ubuntu/xenial64"
   
+   #BALANCEADOR
+  
+   config.vm.define "balanceador" do |app|
+    
+        app.vm.hostname = "balanceador"
+    
+        app.vm.network "private_network", ip: "192.168.33.13"
+    
+        app.vm.provision "shell", path: "provision/provision-for-balanceador.sh"
+    
+      end
+      
   #APACHE-1
   
   config.vm.define "web-1" do |app|
@@ -42,16 +54,6 @@ Vagrant.configure("2") do |config|
     
       end  
       
-  #BALANCEADOR
-  
-  config.vm.define "balanceador" do |app|
-    
-        app.vm.hostname = "balanceador"
-    
-        app.vm.network "private_network", ip: "192.168.33.13"
-    
-        app.vm.provision "shell", path: "provision/provision-for-balanceador.sh"
-    
-      end    
+     
 
 end
