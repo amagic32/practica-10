@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
         app.vm.network "private_network", ip: "192.168.33.10"
     
         app.vm.provision "shell", path: "provision/provision-for-apache.sh"
-    
+        app.vm.provision "shell", path: "provision/nfs/nfs-server.sh" 
       end
 
   #APACHE-2
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
         app.vm.network "private_network", ip: "192.168.33.11"
     
         app.vm.provision "shell", path: "provision/provision-for-apache.sh"
-    
+        app.vm.provision "shell", path: "provision/nfs/nfs-client.sh"
       end
 
   #MYSQL
