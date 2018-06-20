@@ -20,21 +20,24 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 
 #DESCARGAMOS E INSTALAMOS WORDPRESS  
 cd /var/www/html
-mkdir -p sitio-practica-10
-cd /var/www/html/sitio-practica-10
+#mkdir -p sitio-practica-10
+#cd /var/www/html/sitio-practica-10
 wget http://wordpress.org/latest.zip
-unzip /var/www/html/sitio-practica-10/latest.zip
-mv /var/www/html/sitio-practica-10/wordpress/wp-config-sample.php /var/www/html/sitio-practica-10/wordpress/wp-config.php
-sed -i -e 's/database_name_here/wp/' /var/www/html/sitio-practica-10/wordpress/wp-config.php
-sed -i -e 's/username_here/wp_user/' /var/www/html/sitio-practica-10/wordpress/wp-config.php
-sed -i -e 's/password_here/wp_user/' /var/www/html/sitio-practica-10/wordpress/wp-config.php
-sed -i -e 's/localhost/192.168.33.12/' /var/www/html/sitio-practica-10/wordpress/wp-config.php
-sed -i -e 's/database_name_here/wp/' /var/www/html/sitio-practica-10/wordpress/wp-config.php
+unzip /var/www/html/latest.zip
+#mv /var/www/html/sitio-practica-10/wordpress/wp-config-sample.php /var/www/html/sitio-practica-10/wordpress/wp-config.php
+mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+sed -i -e 's/database_name_here/wp/' /var/www/html/wordpress/wp-config.php
+sed -i -e 's/username_here/wp_user/' /var/www/html/wordpress/wp-config.php
+sed -i -e 's/password_here/wp_user/' /var/www/html/wordpress/wp-config.php
+sed -i -e 's/localhost/192.168.33.12/' /var/www/html/wordpress/wp-config.php
+sed -i -e 's/database_name_here/wp/' /var/www/html/wordpress/wp-config.php
 
 WP_HOME="define('WP_HOME','http://192.168.33.13');"
-WP_SITEURL="define('WP_SITEURL','http://192.168.33.13/sitio-practica-10/wordpress');"
+#WP_SITEURL="define('WP_SITEURL','http://192.168.33.13/sitio-practica-10/wordpress');"
+WP_SITEURL="define('WP_SITEURL','http://192.168.33.13/wordpress');"
 
-cd /var/www/html/sitio-practica-10/wordpress
+#cd /var/www/html/sitio-practica-10/wordpress
+cd /var/www/html/wordpress
 
 sed -i "/<?php/a $WP_SITEURL" wp-config.php
 sed -i "/<?php/a $WP_HOME" wp-config.php
@@ -46,10 +49,14 @@ sed -i "/<?php/a $WP_HOME" wp-config.php
 
 cd /var/www/html
 mkdir -p wordpress/wp-content/uploads
+# www-data --> usuarios y grupos de SO
 chown -R www-data:www-data *
 
 rm -f index.html
 
-cp /var/www/html/sitio-practica-10/wordpress/index.php /var/www/html
-sed -i -e 's%wp-blog-header.php%sitio-practica-10/wordpress/wp-blog-header.php%' /var/www/html/index.php
-cp /vagrant/config/.htaccess /var/www/html/sitio-practica-10/
+#cp /var/www/html/sitio-practica-10/wordpress/index.php /var/www/html
+cp /var/www/html/wordpress/index.php /var/www/html
+#sed -i -e 's%wp-blog-header.php%sitio-practica-10/wordpress/wp-blog-header.php%' /var/www/html/index.php
+sed -i -e 's%wp-blog-header.php%wordpress/wp-blog-header.php%' /var/www/html/index.php
+#cp /vagrant/config/.htaccess /var/www/html/sitio-practica-10/
+cp /vagrant/config/.htaccess /var/www/html/
